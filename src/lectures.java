@@ -47,6 +47,12 @@ public class lectures extends JFrame {
 	private JButton GenerateButton;
 	private int i;
 	private JButton backButton;
+	private int[] subject1;
+	private int[] subject2;
+	private int[] subject3;
+	private int[] subject4;
+	private int[] subject5;
+	private int current = 0;
 
 	/**
 	 * Launch the application.
@@ -71,6 +77,27 @@ public class lectures extends JFrame {
 		setResizable(false);
 		this.numberOfSections = n;
 		this.stream = s;
+		
+		subject1 = new int[numberOfSections];
+		subject2 = new int[numberOfSections];
+		subject3 = new int[numberOfSections];
+		subject4 = new int[numberOfSections];
+		subject5 = new int[numberOfSections];
+		for(i=0 ; i<numberOfSections ; i++) {
+			subject1[i] = 3;
+		}
+		for(i=0 ; i<numberOfSections ; i++) {
+			subject2[i] = 3;
+		}
+		for(i=0 ; i<numberOfSections ; i++) {
+			subject3[i] = 3;
+		}
+		for(i=0 ; i<numberOfSections ; i++) {
+			subject4[i] = 3;
+		}
+		for(i=0 ; i<numberOfSections ; i++) {
+			subject5[i] = 3;
+		}
 		
 		lectures_1 = new JLabel("3");
 		lectures_2 = new JLabel("3");
@@ -148,7 +175,19 @@ public class lectures extends JFrame {
 		subject_5.setBounds(83, 420, 172, 30);
 		contentPane.add(subject_5);
 		
+		slider_subject1 = new JSlider();
+		slider_subject2 = new JSlider();
+		slider_subject3 = new JSlider();
+		slider_subject4 = new JSlider();
+		slider_subject5 = new JSlider();
+		
 		subject_1comboBox = new JComboBox();
+		subject_1comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				current = (int) subject_1comboBox.getSelectedItem() - 1;
+				slider_subject1.setValue(subject1[current]);
+			}
+		});
 		subject_1comboBox.setBounds(380, 174, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_1comboBox.addItem(i+1);
@@ -156,6 +195,12 @@ public class lectures extends JFrame {
 		contentPane.add(subject_1comboBox);
 		
 		subject_2comboBox = new JComboBox();
+		subject_2comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				current = (int) subject_2comboBox.getSelectedItem() - 1;
+				slider_subject2.setValue(subject2[current]);
+			}
+		});
 		subject_2comboBox.setBounds(380, 238, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_2comboBox.addItem(i+1);
@@ -163,6 +208,12 @@ public class lectures extends JFrame {
 		contentPane.add(subject_2comboBox);
 		
 		subject_3comboBox = new JComboBox();
+		subject_3comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				current = (int) subject_3comboBox.getSelectedItem() - 1;
+				slider_subject3.setValue(subject3[current]);
+			}
+		});
 		subject_3comboBox.setBounds(380, 305, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_3comboBox.addItem(i+1);
@@ -170,6 +221,12 @@ public class lectures extends JFrame {
 		contentPane.add(subject_3comboBox);
 		
 		subject_4comboBox = new JComboBox();
+		subject_4comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				current = (int) subject_4comboBox.getSelectedItem() - 1;
+				slider_subject4.setValue(subject4[current]);
+			}
+		});
 		subject_4comboBox.setBounds(380, 369, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_4comboBox.addItem(i+1);
@@ -177,16 +234,23 @@ public class lectures extends JFrame {
 		contentPane.add(subject_4comboBox);
 		
 		subject_5comboBox = new JComboBox();
+		subject_5comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				current = (int) subject_5comboBox.getSelectedItem() - 1;
+				slider_subject5.setValue(subject5[current]);
+			}
+		});
 		subject_5comboBox.setBounds(380, 427, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_5comboBox.addItem(i+1);
 		}
 		contentPane.add(subject_5comboBox);
 		
-		slider_subject1 = new JSlider();
 		slider_subject1.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				lectures_1.setText(Integer.toString(slider_subject1.getValue()));
+				current = (int) subject_1comboBox.getSelectedItem() - 1;
+				subject1[current] = slider_subject1.getValue();
 			}
 		});
 		slider_subject1.setValueIsAdjusting(true);
@@ -201,10 +265,11 @@ public class lectures extends JFrame {
 		slider_subject1.setBounds(637, 174, 200, 30);
 		contentPane.add(slider_subject1);
 		
-		slider_subject2 = new JSlider();
 		slider_subject2.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				lectures_2.setText(Integer.toString(slider_subject2.getValue()));
+				current = (int) subject_2comboBox.getSelectedItem() - 1;
+				subject2[current] = slider_subject2.getValue();
 			}
 		});
 		slider_subject2.setValueIsAdjusting(true);
@@ -219,10 +284,11 @@ public class lectures extends JFrame {
 		slider_subject2.setBounds(637, 231, 200, 30);
 		contentPane.add(slider_subject2);
 		
-		slider_subject3 = new JSlider();
 		slider_subject3.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				lectures_3.setText(Integer.toString(slider_subject3.getValue()));
+				current = (int) subject_3comboBox.getSelectedItem() - 1;
+				subject3[current] = slider_subject3.getValue();
 			}
 		});
 		slider_subject3.setValueIsAdjusting(true);
@@ -237,10 +303,11 @@ public class lectures extends JFrame {
 		slider_subject3.setBounds(637, 298, 200, 30);
 		contentPane.add(slider_subject3);
 		
-		slider_subject4 = new JSlider();
 		slider_subject4.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				lectures_4.setText(Integer.toString(slider_subject4.getValue()));
+				current = (int) subject_4comboBox.getSelectedItem() - 1;
+				subject4[current] = slider_subject4.getValue();
 			}
 		});
 		slider_subject4.setValueIsAdjusting(true);
@@ -255,10 +322,11 @@ public class lectures extends JFrame {
 		slider_subject4.setBounds(637, 362, 200, 30);
 		contentPane.add(slider_subject4);
 		
-		slider_subject5 = new JSlider();
 		slider_subject5.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				lectures_5.setText(Integer.toString(slider_subject5.getValue()));
+				current = (int) subject_5comboBox.getSelectedItem() - 1;
+				subject5[current] = slider_subject5.getValue();
 			}
 		});
 		slider_subject5.setValueIsAdjusting(true);
@@ -296,6 +364,11 @@ public class lectures extends JFrame {
 		contentPane.add(lectures_5);
 		
 		GenerateButton = new JButton("GENERATE");
+		GenerateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		GenerateButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GenerateButton.setBounds(443, 568, 181, 30);
 		contentPane.add(GenerateButton);
