@@ -4,12 +4,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.border.CompoundBorder;
 import javax.swing.DefaultComboBoxModel;
@@ -18,7 +22,14 @@ import java.awt.event.ActionEvent;
 
 public class Time_Table_screen {
 
-	private JFrame frame;
+	public JFrame frmTimetableGenerator;
+	private JButton teacherButton;
+	private JButton classButton;
+	private JComboBox comboBox;
+	private JButton viewButton;
+	private int numberOfSections;
+	private String stream;
+	private int i;
 
 	/**
 	 * Launch the application.
@@ -27,8 +38,8 @@ public class Time_Table_screen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Time_Table_screen window = new Time_Table_screen();
-					window.frame.setVisible(true);
+					Time_Table_screen window = new Time_Table_screen(2,"SCIENCE");
+					window.frmTimetableGenerator.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,70 +48,103 @@ public class Time_Table_screen {
 	}
 
 	/**
-	 * Create the application.
-	 */
-	public Time_Table_screen() {
-		initialize();
-	}
-
-	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(102, 205, 170));
-		frame.getContentPane().setForeground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 500, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	public Time_Table_screen(int n, String s) {
+		
+		numberOfSections = n;
+		stream = s;
+		
+		frmTimetableGenerator = new JFrame();
+		frmTimetableGenerator.setTitle("Time-Table Generator");
+		frmTimetableGenerator.setResizable(false);
+		frmTimetableGenerator.getContentPane().setBackground(Color.WHITE);
+		frmTimetableGenerator.getContentPane().setForeground(new Color(0, 0, 0));
+		frmTimetableGenerator.setBounds(100, 100, 1097, 777);
+		frmTimetableGenerator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTimetableGenerator.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("TIMETABLE GENERATED SUCCESSFULLY");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		lblNewLabel.setBounds(119, 10, 301, 37);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(382, 39, 369, 63);
+		frmTimetableGenerator.getContentPane().add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("TEACHER");
-		btnNewButton.addActionListener(new ActionListener() {
+		teacherButton = new JButton("TEACHER");
+		teacherButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-            
-				
+				comboBox.removeAllItems();
+				if(stream.equals("SCIENCE")) {
+					comboBox.addItem("Maths");
+					comboBox.addItem("Physics");
+					comboBox.addItem("Chemistry");
+					comboBox.addItem("English");
+					comboBox.addItem("Computer Sc.");
+				}
+				else if(stream.equals("COMMERCE")) {
+					comboBox.addItem("Maths");
+					comboBox.addItem("Accounts");
+					comboBox.addItem("Business St.");
+					comboBox.addItem("English");
+					comboBox.addItem("Economics");
+				}
+				else if(stream.equals("HUMANITIES")) {
+					comboBox.addItem("Maths");
+					comboBox.addItem("Hindi");
+					comboBox.addItem("Geography");
+					comboBox.addItem("English");
+					comboBox.addItem("Political Sc.");
+				}
+			
 			}
 		});
-		btnNewButton.setBackground(new Color(0, 139, 139));
-		btnNewButton.setForeground(new Color(255, 250, 250));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(40, 108, 144, 51);
-		frame.getContentPane().add(btnNewButton);
+		teacherButton.setBackground(Color.WHITE);
+		teacherButton.setForeground(Color.BLACK);
+		teacherButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		teacherButton.setBounds(270, 196, 144, 51);
+		frmTimetableGenerator.getContentPane().add(teacherButton);
 		
-		JButton btnNewButton_1 = new JButton("STUDENT");
-		btnNewButton_1.setBackground(new Color(0, 139, 139));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_1.setForeground(new Color(255, 250, 250));
-		btnNewButton_1.setBounds(293, 108, 144, 51);
-		frame.getContentPane().add(btnNewButton_1);
+		classButton = new JButton("SECTION");
+		classButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBox.removeAllItems();
+	            for(i = 0; i<numberOfSections ; i++) {
+	            	comboBox.addItem(i+1);
+	            }
+			}
+		});
+		classButton.setBackground(Color.WHITE);
+		classButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		classButton.setForeground(Color.BLACK);
+		classButton.setBounds(732, 196, 144, 51);
+		frmTimetableGenerator.getContentPane().add(classButton);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setEnabled(false);
-		comboBox.setToolTipText("\r\n");
-		comboBox.addItem("Maths");
-		comboBox.addItem("Physics");
-		comboBox.addItem("Chemistry");
-		comboBox.addItem("English");
-		comboBox.addItem("Economics");
+		comboBox = new JComboBox();
+		comboBox.setBounds(503, 350, 150, 30);
+		frmTimetableGenerator.getContentPane().add(comboBox);
 		
+		viewButton = new JButton("View");
+		viewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				timeTableView view = new timeTableView();
+				view.setVisible(true);
+			}
+		});
+		viewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		viewButton.setBounds(520, 509, 133, 35);
+		frmTimetableGenerator.getContentPane().add(viewButton);
 		
-		comboBox.setBounds(40, 271, 150, 21);
-		frame.getContentPane().add(comboBox);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setEnabled(false);
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"A", "B", "C", "D", "E"}));
-		comboBox_1.setBounds(311, 271, 150, 21);
-		frame.getContentPane().add(comboBox_1);
-		
-		JButton btnNewButton_2 = new JButton("Submit");
-		btnNewButton_2.setBounds(198, 363, 121, 37);
-		frame.getContentPane().add(btnNewButton_2);
+		JButton backButton = new JButton("Go Back");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComponent comp = (JComponent) e.getSource();
+				  Window win = SwingUtilities.getWindowAncestor(comp);
+				  win.dispose();
+			}
+		});
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		backButton.setBounds(836, 605, 121, 30);
+		frmTimetableGenerator.getContentPane().add(backButton);
 		
 	}
 }
