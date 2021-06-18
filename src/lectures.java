@@ -18,6 +18,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class lectures extends JFrame {
 
@@ -53,6 +54,7 @@ public class lectures extends JFrame {
 	private int[] subject4;
 	private int[] subject5;
 	private int current = 0;
+	private String name;
 
 	/**
 	 * Launch the application.
@@ -61,7 +63,7 @@ public class lectures extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					lectures frame = new lectures(1,"SCIENCE");
+					lectures frame = new lectures(1,"SCIENCE","Default");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,10 +75,12 @@ public class lectures extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public lectures(int n,String s) {
+	public lectures(int n,String s,String na) {
+		setTitle("Time-Table Generator");
 		setResizable(false);
 		this.numberOfSections = n;
 		this.stream = s;
+		this.name = na;
 		
 		subject1 = new int[numberOfSections];
 		subject2 = new int[numberOfSections];
@@ -136,6 +140,7 @@ public class lectures extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1097, 777);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -366,7 +371,11 @@ public class lectures extends JFrame {
 		GenerateButton = new JButton("GENERATE");
 		GenerateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name);
+				screen.frmTimetableGenerator.setVisible(true);
+				JComponent comp = (JComponent) e.getSource();
+				  Window win = SwingUtilities.getWindowAncestor(comp);
+				  win.dispose();
 			}
 		});
 		GenerateButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -379,6 +388,8 @@ public class lectures extends JFrame {
 				JComponent comp = (JComponent) e.getSource();
 				  Window win = SwingUtilities.getWindowAncestor(comp);
 				  win.dispose();
+				  MainWindow main = new MainWindow(name);
+					main.frmTimetableGenerator.setVisible(true);
 			}
 		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));

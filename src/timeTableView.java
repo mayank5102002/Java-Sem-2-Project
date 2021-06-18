@@ -31,6 +31,9 @@ public class timeTableView extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel breakLabel;
+	private int numberOfSections;
+	private String stream;
+	private String name;
 
 	/**
 	 * Launch the application.
@@ -39,7 +42,7 @@ public class timeTableView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					timeTableView frame = new timeTableView();
+					timeTableView frame = new timeTableView(0,"SCIENCE","Default");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +54,12 @@ public class timeTableView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public timeTableView() {
+	public timeTableView(int n,String s, String na) {
+		
+		this.numberOfSections = n;
+		this.stream = s;
+		this.name = na;
+		
 		String table1[][] = {{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
 				{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
 				{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"}};
@@ -182,6 +190,8 @@ public class timeTableView extends JFrame {
 				JComponent comp = (JComponent) e.getSource();
 				  Window win = SwingUtilities.getWindowAncestor(comp);
 				  win.dispose();
+				  Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name);
+					screen.frmTimetableGenerator.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
