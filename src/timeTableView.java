@@ -55,7 +55,7 @@ public class timeTableView extends JFrame {
 	 * Create the frame.
 	 */
 	public timeTableView(int n,String s, String na) {
-		
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.numberOfSections = n;
 		this.stream = s;
 		this.name = na;

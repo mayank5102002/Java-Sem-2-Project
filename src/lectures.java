@@ -76,6 +76,7 @@ public class lectures extends JFrame {
 	 * Create the frame.
 	 */
 	public lectures(int n,String s,String na) {
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setTitle("Time-Table Generator");
 		setResizable(false);
 		this.numberOfSections = n;

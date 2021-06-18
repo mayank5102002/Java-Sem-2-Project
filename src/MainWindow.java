@@ -70,6 +70,7 @@ public class MainWindow {
 		frmTimetableGenerator.getContentPane().setForeground(Color.WHITE);
 		frmTimetableGenerator.setTitle("Time-Table Generator");
 		frmTimetableGenerator.setBounds(100, 100, 1097, 777);
+		frmTimetableGenerator.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frmTimetableGenerator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTimetableGenerator.getContentPane().setLayout(null);
 		

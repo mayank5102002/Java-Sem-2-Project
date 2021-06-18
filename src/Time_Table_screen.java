@@ -58,6 +58,7 @@ public class Time_Table_screen {
 		name = na;
 		
 		frmTimetableGenerator = new JFrame();
+		frmTimetableGenerator.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frmTimetableGenerator.setTitle("Time-Table Generator");
 		frmTimetableGenerator.setResizable(false);
 		frmTimetableGenerator.getContentPane().setBackground(Color.WHITE);

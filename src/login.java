@@ -89,6 +89,7 @@ public class login extends JFrame {
 	public login() {
 		setTitle("Time-Table Generator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBounds(100, 100, 1097, 777);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
