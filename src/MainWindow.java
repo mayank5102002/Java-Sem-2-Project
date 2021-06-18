@@ -7,13 +7,17 @@ import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
 import javax.swing.JEditorPane;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
@@ -22,7 +26,7 @@ import java.awt.event.MouseEvent;
 
 public class MainWindow {
 
-	private JFrame frmTimetableGenerator;
+	public JFrame frmTimetableGenerator;
 	private JButton scienceButton;
 	private JButton commerceButton;
 	private JButton humanitiesButton;
@@ -30,6 +34,8 @@ public class MainWindow {
 	private int numberOfSections = 0;
 	private String stream = "";
 	private JButton btnNewButton;
+	private JLabel nameLabel;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -38,7 +44,7 @@ public class MainWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow window = new MainWindow();
+					MainWindow window = new MainWindow("Default");
 					window.frmTimetableGenerator.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,14 +56,14 @@ public class MainWindow {
 	/**
 	 * Create the application.
 	 */
-	public MainWindow() {
-		initialize();
+	public MainWindow(String name) {
+		initialize(name);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String name) {
 		frmTimetableGenerator = new JFrame();
 		frmTimetableGenerator.setResizable(false);
 		frmTimetableGenerator.getContentPane().setBackground(Color.WHITE);
@@ -131,13 +137,35 @@ public class MainWindow {
 				if(numberOfSections == 0 || stream.equals("")) {
 					JOptionPane.showMessageDialog(lblNewLabel_2, "Select a Stream");
 				}else {
-				lectures frame = new lectures(numberOfSections, stream);
+				lectures frame = new lectures(numberOfSections, stream,name);
 				frame.setVisible(true);
+				JComponent comp = (JComponent) e.getSource();
+				  Window win = SwingUtilities.getWindowAncestor(comp);
+				  win.dispose();
 				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.setBounds(492, 560, 164, 30);
 		frmTimetableGenerator.getContentPane().add(btnNewButton);
+		
+		nameLabel = new JLabel("Welcome " + name);
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		nameLabel.setBounds(769, 42, 314, 30);
+		frmTimetableGenerator.getContentPane().add(nameLabel);
+		
+		btnNewButton_1 = new JButton("Go Back");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComponent comp = (JComponent) e.getSource();
+				  Window win = SwingUtilities.getWindowAncestor(comp);
+				  win.dispose();
+				  login log = new login();
+				  log.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton_1.setBounds(882, 613, 112, 30);
+		frmTimetableGenerator.getContentPane().add(btnNewButton_1);
 	}
 }

@@ -30,6 +30,7 @@ public class Time_Table_screen {
 	private int numberOfSections;
 	private String stream;
 	private int i;
+	private String name;
 
 	/**
 	 * Launch the application.
@@ -38,7 +39,7 @@ public class Time_Table_screen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Time_Table_screen window = new Time_Table_screen(2,"SCIENCE");
+					Time_Table_screen window = new Time_Table_screen(2,"SCIENCE","Default");
 					window.frmTimetableGenerator.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,10 +51,11 @@ public class Time_Table_screen {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public Time_Table_screen(int n, String s) {
+	public Time_Table_screen(int n, String s,String na) {
 		
 		numberOfSections = n;
 		stream = s;
+		name = na;
 		
 		frmTimetableGenerator = new JFrame();
 		frmTimetableGenerator.setTitle("Time-Table Generator");
@@ -66,8 +68,8 @@ public class Time_Table_screen {
 		
 		JLabel lblNewLabel = new JLabel("TIMETABLE GENERATED SUCCESSFULLY");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		lblNewLabel.setBounds(382, 39, 369, 63);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		lblNewLabel.setBounds(282, 36, 594, 63);
 		frmTimetableGenerator.getContentPane().add(lblNewLabel);
 		
 		teacherButton = new JButton("TEACHER");
@@ -100,7 +102,7 @@ public class Time_Table_screen {
 		});
 		teacherButton.setBackground(Color.WHITE);
 		teacherButton.setForeground(Color.BLACK);
-		teacherButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		teacherButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		teacherButton.setBounds(270, 196, 144, 51);
 		frmTimetableGenerator.getContentPane().add(teacherButton);
 		
@@ -114,7 +116,7 @@ public class Time_Table_screen {
 			}
 		});
 		classButton.setBackground(Color.WHITE);
-		classButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		classButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		classButton.setForeground(Color.BLACK);
 		classButton.setBounds(732, 196, 144, 51);
 		frmTimetableGenerator.getContentPane().add(classButton);
@@ -126,8 +128,11 @@ public class Time_Table_screen {
 		viewButton = new JButton("View");
 		viewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				timeTableView view = new timeTableView();
+				timeTableView view = new timeTableView(numberOfSections,stream,name);
 				view.setVisible(true);
+				JComponent comp = (JComponent) e.getSource();
+				  Window win = SwingUtilities.getWindowAncestor(comp);
+				  win.dispose();
 			}
 		});
 		viewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -140,6 +145,8 @@ public class Time_Table_screen {
 				JComponent comp = (JComponent) e.getSource();
 				  Window win = SwingUtilities.getWindowAncestor(comp);
 				  win.dispose();
+				  lectures frame = new lectures(numberOfSections, stream,name);
+					frame.setVisible(true);
 			}
 		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
