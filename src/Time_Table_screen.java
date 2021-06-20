@@ -16,8 +16,14 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.border.CompoundBorder;
+
+import database.connection;
+
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 public class Time_Table_screen {
@@ -31,6 +37,8 @@ public class Time_Table_screen {
 	private String stream;
 	private int i;
 	private String name;
+	private String[] teacherNames = new String[5];
+	private String[] subjects = new String[5];
 
 	/**
 	 * Launch the application.
@@ -48,6 +56,21 @@ public class Time_Table_screen {
 		});
 	}
 
+	public void getNames() {
+		try {
+		Connection con = connection.teacherNamesConnect();
+		PreparedStatement pst = con.prepareStatement("SELECT * FROM names");
+		ResultSet r = pst.executeQuery();
+		int i = 0;
+		while(r.next()) {
+			teacherNames[i] = r.getString("name");
+			subjects[i] = r.getString("subject");
+			i++;
+		}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -77,28 +100,10 @@ public class Time_Table_screen {
 		teacherButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox.removeAllItems();
-				if(stream.equals("SCIENCE")) {
-					comboBox.addItem("Maths");
-					comboBox.addItem("Physics");
-					comboBox.addItem("Chemistry");
-					comboBox.addItem("English");
-					comboBox.addItem("Computer Sc.");
+				getNames();
+				for(int i=0;i<5;i++) {
+					comboBox.addItem(teacherNames[i] + " - " + subjects[i]);
 				}
-				else if(stream.equals("COMMERCE")) {
-					comboBox.addItem("Maths");
-					comboBox.addItem("Accounts");
-					comboBox.addItem("Business St.");
-					comboBox.addItem("English");
-					comboBox.addItem("Economics");
-				}
-				else if(stream.equals("HUMANITIES")) {
-					comboBox.addItem("Maths");
-					comboBox.addItem("Hindi");
-					comboBox.addItem("Geography");
-					comboBox.addItem("English");
-					comboBox.addItem("Political Sc.");
-				}
-			
 			}
 		});
 		teacherButton.setBackground(Color.WHITE);

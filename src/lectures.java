@@ -15,10 +15,16 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 import javax.swing.event.ChangeListener;
+
+import database.connection;
+
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 public class lectures extends JFrame {
 
@@ -55,6 +61,11 @@ public class lectures extends JFrame {
 	private int[] subject5;
 	private int current = 0;
 	private String name;
+	private JTextField teacher_1;
+	private JTextField teacher_2;
+	private JTextField teacher_3;
+	private JTextField teacher_4;
+	private JTextField teacher_5;
 
 	/**
 	 * Launch the application.
@@ -72,6 +83,28 @@ public class lectures extends JFrame {
 		});
 	}
 
+	public void delete() {
+		try {
+			Connection con = connection.teacherNamesConnect();
+			PreparedStatement pst = con.prepareStatement("CREATE TABLE IF NOT EXISTS names(name TEXT NOT NULL,subject TEXT NOT NULL)");
+			pst.executeUpdate();
+			pst = con.prepareStatement("DELETE FROM names");
+			pst.executeUpdate();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	public void enterNames(String name,String subject) {
+		try {
+		Connection con = connection.teacherNamesConnect();
+		PreparedStatement pst = con.prepareStatement("INSERT INTO names(name,subject) VALUES(?,?)");
+		pst.setString(1, name);
+		pst.setString(2, subject);
+		pst.executeUpdate();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -139,7 +172,7 @@ public class lectures extends JFrame {
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1097, 777);
+		setBounds(100, 100, 1435, 958);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -370,10 +403,27 @@ public class lectures extends JFrame {
 		contentPane.add(lectures_5);
 		
 		GenerateButton = new JButton("GENERATE");
+		teacher_1 = new JTextField();
+		teacher_2 = new JTextField();
+		teacher_3 = new JTextField();
+		teacher_4 = new JTextField();
+		teacher_5 = new JTextField();
+		
 		GenerateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name);
 				screen.frmTimetableGenerator.setVisible(true);
+				String teacherName1 = teacher_1.getText();
+				String teacherName2 = teacher_2.getText();
+				String teacherName3 = teacher_3.getText();
+				String teacherName4 = teacher_4.getText();
+				String teacherName5 = teacher_5.getText();
+				delete();
+				enterNames(teacherName1,subject_1.getText());
+				enterNames(teacherName2,subject_2.getText());
+				enterNames(teacherName3,subject_3.getText());
+				enterNames(teacherName4,subject_4.getText());
+				enterNames(teacherName5,subject_5.getText());
 				JComponent comp = (JComponent) e.getSource();
 				  Window win = SwingUtilities.getWindowAncestor(comp);
 				  win.dispose();
@@ -396,5 +446,40 @@ public class lectures extends JFrame {
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		backButton.setBounds(905, 622, 112, 30);
 		contentPane.add(backButton);
+		
+		JLabel lblNewLabel = new JLabel("Enter the Number of lectures and Name of the Teacher for the respective subject");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblNewLabel.setBounds(290, 50, 814, 30);
+		contentPane.add(lblNewLabel);
+		
+		teacher_1.setToolTipText("Enter the name of the Teacher");
+		teacher_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		teacher_1.setBounds(1105, 174, 229, 30);
+		contentPane.add(teacher_1);
+		teacher_1.setColumns(10);
+		
+		teacher_2.setToolTipText("Enter the name of the Teacher");
+		teacher_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		teacher_2.setColumns(10);
+		teacher_2.setBounds(1105, 231, 229, 30);
+		contentPane.add(teacher_2);
+		
+		teacher_3.setToolTipText("Enter the name of the Teacher");
+		teacher_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		teacher_3.setColumns(10);
+		teacher_3.setBounds(1105, 298, 229, 30);
+		contentPane.add(teacher_3);
+		
+		teacher_4.setToolTipText("Enter the name of the Teacher");
+		teacher_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		teacher_4.setColumns(10);
+		teacher_4.setBounds(1105, 362, 229, 30);
+		contentPane.add(teacher_4);
+		
+		teacher_5.setToolTipText("Enter the name of the Teacher");
+		teacher_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		teacher_5.setColumns(10);
+		teacher_5.setBounds(1105, 433, 229, 30);
+		contentPane.add(teacher_5);
 	}
 }

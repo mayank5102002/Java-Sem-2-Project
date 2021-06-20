@@ -27,15 +27,13 @@ import java.awt.event.MouseEvent;
 public class MainWindow {
 
 	public JFrame frmTimetableGenerator;
-	private JButton scienceButton;
-	private JButton commerceButton;
-	private JButton humanitiesButton;
 	private JComboBox sectionsNumberComboBox;
 	private int numberOfSections = 0;
-	private String stream = "";
+	private String stream = "SCIENCE";
 	private JButton btnNewButton;
 	private JLabel nameLabel;
 	private JButton btnNewButton_1;
+	private JComboBox streamComboBox;
 
 	/**
 	 * Launch the application.
@@ -69,44 +67,14 @@ public class MainWindow {
 		frmTimetableGenerator.getContentPane().setBackground(Color.WHITE);
 		frmTimetableGenerator.getContentPane().setForeground(Color.WHITE);
 		frmTimetableGenerator.setTitle("Time-Table Generator");
-		frmTimetableGenerator.setBounds(100, 100, 1097, 777);
+		frmTimetableGenerator.setBounds(100, 100, 1514, 882);
 		frmTimetableGenerator.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frmTimetableGenerator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTimetableGenerator.getContentPane().setLayout(null);
 		
-		scienceButton = new JButton("SCIENCE");
-		scienceButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				stream = "SCIENCE";
-			}
-		});
-		commerceButton = new JButton("COMMERCE");
-		commerceButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				stream = "COMMERCE";
-			}
-		});
-		humanitiesButton = new JButton("HUMANITIES");
-		humanitiesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				stream = "HUMANITIES";
-			}
-		});
-		scienceButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scienceButton.setBounds(165, 129, 102, 30);
-		frmTimetableGenerator.getContentPane().add(scienceButton);
-		
-		commerceButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		commerceButton.setBounds(469, 129, 134, 30);
-		frmTimetableGenerator.getContentPane().add(commerceButton);
-		
-		humanitiesButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		humanitiesButton.setBounds(807, 129, 134, 30);
-		frmTimetableGenerator.getContentPane().add(humanitiesButton);
-		
 		JLabel lblNewLabel = new JLabel("Choose Course");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(155, 96, 144, 23);
+		lblNewLabel.setBounds(155, 135, 144, 30);
 		frmTimetableGenerator.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("TIME-TABLE GENERATOR");
@@ -168,5 +136,17 @@ public class MainWindow {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton_1.setBounds(882, 613, 112, 30);
 		frmTimetableGenerator.getContentPane().add(btnNewButton_1);
+		
+		streamComboBox = new JComboBox();
+		streamComboBox.addItem("SCIENCE");
+		streamComboBox.addItem("COMMERCE");
+		streamComboBox.addItem("HUMANITIES");
+		streamComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					stream = (String) streamComboBox.getSelectedItem();
+			}
+		});
+		streamComboBox.setBounds(335, 142, 144, 21);
+		frmTimetableGenerator.getContentPane().add(streamComboBox);
 	}
 }
