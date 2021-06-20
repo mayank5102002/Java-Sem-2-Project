@@ -20,4 +20,15 @@ public class connection {
 		}
 	}
 	
+	public static Connection teacherNamesConnect() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/teachernames","root","");
+			return conn;
+		}catch(Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+	
 }
