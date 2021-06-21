@@ -34,6 +34,12 @@ public class timeTableView extends JFrame {
 	private int numberOfSections;
 	private String stream;
 	private String name;
+	static String table1[][] = {{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
+			{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
+			{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"}};
+	static String table2[][] = {{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
+			{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
+			{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"}};
 
 	/**
 	 * Launch the application.
@@ -42,7 +48,7 @@ public class timeTableView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					timeTableView frame = new timeTableView(0,"SCIENCE","Default");
+					timeTableView frame = new timeTableView(0,"SCIENCE","Default",null,null,null,null,null,table1,table2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,18 +60,12 @@ public class timeTableView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public timeTableView(int n,String s, String na) {
+	public timeTableView(int n,String s, String na,int[] s1,int[] s2,int[] s3,int[] s4,int[] s5,String[][] t1,String[][] t2) {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.numberOfSections = n;
 		this.stream = s;
 		this.name = na;
 		
-		String table1[][] = {{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
-				{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
-				{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"}};
-		String table2[][] = {{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
-				{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"},
-				{"SEC 1","SEC 2","SEC 3"},{"SEC 1","SEC 2","SEC 3"}};
 		setTitle("Time-Table Generator");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,11 +84,10 @@ public class timeTableView extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		contentPane.add(lblNewLabel);
 		
-		
 		String column1[] = {"8-9","9-10","10-11"};
 		String column2[] = {"11:30-12:30","12:30-1:30","1:30-2:30"};
 		
-		JTable table_1 = new JTable(table1,column1);
+		JTable table_1 = new JTable(t1,column1);
 		table_1.setShowVerticalLines(false);
 		table_1.setShowGrid(false);
 		table_1.setShowHorizontalLines(false);
@@ -100,7 +99,7 @@ public class timeTableView extends JFrame {
 		table_1.setBounds(189, 229, 368, 369);
 		contentPane.add(table_1);
 		
-		JTable table_2 = new JTable(table2,column2);
+		JTable table_2 = new JTable(t2,column2);
 		table_2.setRowMargin(3);
 		table_2.setRowHeight(60);
 		table_2.setRowSelectionAllowed(false);
@@ -190,7 +189,7 @@ public class timeTableView extends JFrame {
 				JComponent comp = (JComponent) e.getSource();
 				  Window win = SwingUtilities.getWindowAncestor(comp);
 				  win.dispose();
-				  Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name);
+				  Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name,s1,s2,s3,s4,s5);
 					screen.frmTimetableGenerator.setVisible(true);
 			}
 		});

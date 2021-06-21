@@ -3,7 +3,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JButton;
-import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -13,27 +12,19 @@ import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JSpinner;
-import javax.swing.JScrollBar;
-import javax.swing.JEditorPane;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MainWindow {
 
 	public JFrame frmTimetableGenerator;
-	private JComboBox sectionsNumberComboBox;
+	private JComboBox<String> sectionsNumberComboBox;
 	private int numberOfSections = 0;
 	private String stream = "SCIENCE";
 	private JButton btnNewButton;
 	private JLabel nameLabel;
 	private JButton btnNewButton_1;
-	private JComboBox streamComboBox;
+	private JComboBox<String> streamComboBox;
 
 	/**
 	 * Launch the application.
@@ -88,7 +79,7 @@ public class MainWindow {
 		lblNewLabel_2.setBounds(155, 226, 125, 30);
 		frmTimetableGenerator.getContentPane().add(lblNewLabel_2);
 		
-		sectionsNumberComboBox = new JComboBox();
+		sectionsNumberComboBox = new JComboBox<String>();
 		sectionsNumberComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				numberOfSections = Integer.parseInt((String) sectionsNumberComboBox.getSelectedItem());
@@ -137,7 +128,7 @@ public class MainWindow {
 		btnNewButton_1.setBounds(882, 613, 112, 30);
 		frmTimetableGenerator.getContentPane().add(btnNewButton_1);
 		
-		streamComboBox = new JComboBox();
+		streamComboBox = new JComboBox<String>();
 		streamComboBox.addItem("SCIENCE");
 		streamComboBox.addItem("COMMERCE");
 		streamComboBox.addItem("HUMANITIES");

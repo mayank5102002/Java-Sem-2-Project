@@ -24,7 +24,7 @@ public class section {
 			int s=n;
 			String ss;
 			ss = String.valueOf(s);
-			if(t1[i][j]==ss)
+			if(t1[i][j].equals(ss))
 			{
 				this.s[i][j] = "1";
 			}
@@ -37,7 +37,7 @@ public class section {
 			int s=n;
 			String ss;
 			ss = String.valueOf(s);
-			if(t2[i][j]==ss)
+			if(t2[i][j].equals(ss))
 			{
 				this.s[i][j]="2";
 			}
@@ -50,7 +50,7 @@ public class section {
 			int s=n;
 			String ss;
 			ss = String.valueOf(s);
-			if(t3[i][j]==ss)
+			if(t3[i][j].equals(ss))
 			{
 				this.s[i][j]="3";
 			}
@@ -63,7 +63,7 @@ public class section {
 			int s=n;
 			String ss;
 			ss = String.valueOf(s);
-			if(t4[i][j]==ss)
+			if(t4[i][j].equals(ss))
 			{
 				this.s[i][j]="4";
 			}
@@ -76,7 +76,7 @@ public class section {
 			int s=n;
 			String ss;
 			ss = String.valueOf(s);
-			if(t5[i][j]==ss)
+			if(t5[i][j].equals(ss))
 			{
 				this.s[i][j]="5";
 			}

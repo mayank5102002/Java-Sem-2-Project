@@ -411,8 +411,6 @@ public class lectures extends JFrame {
 		
 		GenerateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name);
-				screen.frmTimetableGenerator.setVisible(true);
 				String teacherName1 = teacher_1.getText();
 				String teacherName2 = teacher_2.getText();
 				String teacherName3 = teacher_3.getText();
@@ -424,6 +422,8 @@ public class lectures extends JFrame {
 				enterNames(teacherName3,subject_3.getText());
 				enterNames(teacherName4,subject_4.getText());
 				enterNames(teacherName5,subject_5.getText());
+				Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name,subject1,subject2,subject3,subject4,subject5);
+				screen.frmTimetableGenerator.setVisible(true);
 				JComponent comp = (JComponent) e.getSource();
 				  Window win = SwingUtilities.getWindowAncestor(comp);
 				  win.dispose();
