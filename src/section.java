@@ -8,7 +8,7 @@ public class section {
 	    {
 		for(int j=0;j<6;j++)
 		{
-			s[i][j]="";
+			s[i][j]="0";
 		}
 	    }
     }

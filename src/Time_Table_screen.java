@@ -124,7 +124,12 @@ public class Time_Table_screen {
 			JOptionPane.showMessageDialog(null, "Invalid number of lectures added for " + subjects[4]
 					+ "\nExiting the program!");
 			System.exit(2);}
-
+		
+		section[] sections = new section[numberOfSections];
+		for(int i=0 ; i<numberOfSections ; i++) {
+			sections[i] = new section();
+			sections[i].transfer(i+1, teacher_1.t, teacher_2.t,teacher_3.t, teacher_4.t, teacher_5.t);
+		}
 		frmTimetableGenerator = new JFrame();
 		frmTimetableGenerator.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frmTimetableGenerator.setTitle("Time-Table Generator");
@@ -256,13 +261,68 @@ public class Time_Table_screen {
 								table1[i][j] = "FREE";
 							}
 							else {
-								table1[i][j] = "SEC " + table1[i][j];
+								table1[i][j] = "SECTION " + table1[i][j];
 							}
 							if(table2[i][j].equals("0")) {
 								table2[i][j] = "FREE";
 							}
 							else {
-								table2[i][j] = "SEC " + table2[i][j];
+								table2[i][j] = "SECTION " + table2[i][j];
+							}
+						}
+					}
+				}
+				else if(selected.equals("section")) {
+					index = comboBox.getSelectedIndex();
+					int i,j,k,l;
+					for(i=0 ; i<6 ; i++) {
+						for(j=0 ; j<3 ; j++) {
+							table1[i][j] = sections[index].s[i][j];
+						}
+					}
+					for(k=0,i=0 ; k<6 ; k++,i++) {
+						for(l=0,j=3 ; l<3 ; l++,j++) {
+							table2[k][l] = sections[index].s[i][j];
+						}
+					}
+					for(i=0 ; i<6 ; i++) {
+						for(j=0 ; j<3 ; j++) {
+							if(table1[i][j].equals("0")) {
+								table1[i][j] = "FREE";
+							}
+							else if(table1[i][j].equals("1")) {
+								table1[i][j] = subjects[0];
+							}
+							else if(table1[i][j].equals("2")) {
+								table1[i][j] = subjects[1];
+							}
+							else if(table1[i][j].equals("3")) {
+								table1[i][j] = subjects[2];
+							}
+							else if(table1[i][j].equals("4")) {
+								table1[i][j] = subjects[3];
+							}
+							else if(table1[i][j].equals("5")) {
+								table1[i][j] = subjects[4];
+							}
+							
+							if(table2[i][j].equals("0")) {
+								table2[i][j] = "FREE";
+							}
+							else if(table2[i][j].equals("1")) {
+								table2[i][j] = subjects[0];
+							}
+							else if(table2[i][j].equals("2")) {
+								table2[i][j] = subjects[1];
+							}
+							else if(table2[i][j].equals("3")) {
+								table2[i][j] = subjects[2];
+							}
+							else if(table2[i][j].equals("4")) {
+								table2[i][j] = subjects[3];
+							}
+							else if(table2[i][j].equals("5")) {
+								table2[i][j] = subjects[4];
 							}
 						}
 					}
