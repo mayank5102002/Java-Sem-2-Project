@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -27,6 +26,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class login extends JFrame {
 
@@ -87,7 +88,8 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
-		setTitle("Time-Table Generator");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(login.class.getResource("/Images/saturday _icon.png")));
+		setTitle("Saturday: Timetable Planner");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBounds(100, 100, 1097, 777);
@@ -97,29 +99,27 @@ public class login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Username");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(297, 191, 114, 30);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPassword.setBounds(297, 312, 114, 30);
-		contentPane.add(lblPassword);
-		
 		userTextField = new JTextField();
 		userTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		userTextField.setBounds(610, 199, 256, 30);
+		userTextField.setBounds(1058, 328, 256, 30);
 		contentPane.add(userTextField);
 		userTextField.setColumns(10);
 		
 		passTextField = new JPasswordField();
 		passTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		passTextField.setColumns(10);
-		passTextField.setBounds(610, 312, 256, 30);
+		passTextField.setBounds(1058, 470, 256, 30);
 		contentPane.add(passTextField);
 		
 		JButton loginButton = new JButton("LOGIN");
+		loginButton.setFont(new Font("Tw Cen MT", Font.BOLD, 15));
+		loginButton.setBackground(Color.white);
+		loginButton.setForeground(Color.white);
+		loginButton.setOpaque(false);
+		loginButton.setContentAreaFilled(false);
+		loginButton.setBorderPainted(true);
+		loginButton.setBorder(new RoundedBorder(35));
+		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String user = userTextField.getText();
@@ -135,11 +135,17 @@ public class login extends JFrame {
 				}
 			}
 		});
-		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		loginButton.setBounds(373, 490, 114, 30);
+		loginButton.setBounds(1042, 583, 130, 30);
 		contentPane.add(loginButton);
 		
-		JButton signupButton = new JButton("SignUp");
+		JButton signupButton = new JButton("SIGN-IN");
+		signupButton.setFont(new Font("Tw Cen MT", Font.BOLD, 15));
+		signupButton.setBackground(Color.white);
+		signupButton.setForeground(Color.white);
+		signupButton.setOpaque(false);
+		signupButton.setContentAreaFilled(false);
+		signupButton.setBorderPainted(true);
+		signupButton.setBorder(new RoundedBorder(35));
 		signupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(createTable()) {
@@ -153,14 +159,17 @@ public class login extends JFrame {
 				}
 			}
 		});
-		signupButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		signupButton.setBounds(613, 490, 114, 30);
+		signupButton.setBounds(1042, 641, 130, 30);
 		contentPane.add(signupButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("LOGIN");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		lblNewLabel_1.setBounds(427, 82, 320, 45);
-		contentPane.add(lblNewLabel_1);
+		JLabel school_img = new JLabel("\r\n");
+		school_img.setIcon(new ImageIcon(login.class.getResource("/Images/saturday.gif")));
+		school_img.setBounds(0, 62, 727, 740);
+		contentPane.add(school_img);
+		
+		JLabel background = new JLabel("New label");
+		background.setIcon(new ImageIcon(login.class.getResource("/Images/login portal.png")));
+		background.setBounds(730, 0, 761, 908);
+		contentPane.add(background);
 	}
 }

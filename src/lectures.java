@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -6,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Window;
 
 import javax.swing.JComboBox;
@@ -24,7 +25,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.border.Border;
+import java.awt.Toolkit;
+
+class RoundedBorder implements Border {
+
+    private int radius;
+    RoundedBorder(int radius) {
+        this.radius = radius;
+    }
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+    }
+    public boolean isBorderOpaque() {
+        return true;
+    }
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+    }
+}
 
 public class lectures extends JFrame {
 
@@ -66,6 +89,7 @@ public class lectures extends JFrame {
 	private JTextField teacher_3;
 	private JTextField teacher_4;
 	private JTextField teacher_5;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -109,8 +133,9 @@ public class lectures extends JFrame {
 	 * Create the frame.
 	 */
 	public lectures(int n,String s,String na) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(lectures.class.getResource("/Images/saturday _icon.png")));
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setTitle("Time-Table Generator");
+		setTitle("Saturday: Timetable Planner");
 		setResizable(false);
 		this.numberOfSections = n;
 		this.stream = s;
@@ -179,39 +204,24 @@ public class lectures extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_3 = new JLabel("Subjects");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_3.setBounds(128, 106, 92, 30);
-		contentPane.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Section");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_4.setBounds(368, 106, 92, 30);
-		contentPane.add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("No. of Lectures");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(656, 106, 181, 30);
-		contentPane.add(lblNewLabel_5);
-		
 		subject_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		subject_1.setBounds(83, 174, 172, 30);
+		subject_1.setBounds(178, 392, 172, 30);
 		contentPane.add(subject_1);
 		
 		subject_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		subject_2.setBounds(83, 231, 172, 30);
+		subject_2.setBounds(178, 453, 172, 30);
 		contentPane.add(subject_2);
 		
 		subject_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		subject_3.setBounds(83, 298, 172, 30);
+		subject_3.setBounds(178, 516, 172, 30);
 		contentPane.add(subject_3);
 		
 		subject_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		subject_4.setBounds(83, 362, 172, 30);
+		subject_4.setBounds(178, 574, 172, 30);
 		contentPane.add(subject_4);
 		
 		subject_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		subject_5.setBounds(83, 420, 172, 30);
+		subject_5.setBounds(178, 634, 172, 30);
 		contentPane.add(subject_5);
 		
 		slider_subject1 = new JSlider();
@@ -227,7 +237,7 @@ public class lectures extends JFrame {
 				slider_subject1.setValue(subject1[current]);
 			}
 		});
-		subject_1comboBox.setBounds(380, 174, 40, 30);
+		subject_1comboBox.setBounds(475, 392, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_1comboBox.addItem(i+1);
 		}
@@ -240,7 +250,7 @@ public class lectures extends JFrame {
 				slider_subject2.setValue(subject2[current]);
 			}
 		});
-		subject_2comboBox.setBounds(380, 238, 40, 30);
+		subject_2comboBox.setBounds(475, 453, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_2comboBox.addItem(i+1);
 		}
@@ -253,7 +263,7 @@ public class lectures extends JFrame {
 				slider_subject3.setValue(subject3[current]);
 			}
 		});
-		subject_3comboBox.setBounds(380, 305, 40, 30);
+		subject_3comboBox.setBounds(475, 516, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_3comboBox.addItem(i+1);
 		}
@@ -266,7 +276,7 @@ public class lectures extends JFrame {
 				slider_subject4.setValue(subject4[current]);
 			}
 		});
-		subject_4comboBox.setBounds(380, 369, 40, 30);
+		subject_4comboBox.setBounds(475, 574, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_4comboBox.addItem(i+1);
 		}
@@ -279,7 +289,7 @@ public class lectures extends JFrame {
 				slider_subject5.setValue(subject5[current]);
 			}
 		});
-		subject_5comboBox.setBounds(380, 427, 40, 30);
+		subject_5comboBox.setBounds(475, 634, 40, 30);
 		for(i = 0; i<numberOfSections ; i++) {
 			subject_5comboBox.addItem(i+1);
 		}
@@ -301,7 +311,7 @@ public class lectures extends JFrame {
 		slider_subject1.setMaximum(8);
 		slider_subject1.setMajorTickSpacing(1);
 		slider_subject1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		slider_subject1.setBounds(637, 174, 200, 30);
+		slider_subject1.setBounds(679, 392, 200, 30);
 		contentPane.add(slider_subject1);
 		
 		slider_subject2.addChangeListener(new ChangeListener() {
@@ -320,7 +330,7 @@ public class lectures extends JFrame {
 		slider_subject2.setMaximum(8);
 		slider_subject2.setMajorTickSpacing(1);
 		slider_subject2.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		slider_subject2.setBounds(637, 231, 200, 30);
+		slider_subject2.setBounds(679, 453, 200, 30);
 		contentPane.add(slider_subject2);
 		
 		slider_subject3.addChangeListener(new ChangeListener() {
@@ -339,7 +349,7 @@ public class lectures extends JFrame {
 		slider_subject3.setMaximum(8);
 		slider_subject3.setMajorTickSpacing(1);
 		slider_subject3.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		slider_subject3.setBounds(637, 298, 200, 30);
+		slider_subject3.setBounds(679, 516, 200, 30);
 		contentPane.add(slider_subject3);
 		
 		slider_subject4.addChangeListener(new ChangeListener() {
@@ -358,7 +368,7 @@ public class lectures extends JFrame {
 		slider_subject4.setMaximum(8);
 		slider_subject4.setMajorTickSpacing(1);
 		slider_subject4.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		slider_subject4.setBounds(637, 362, 200, 30);
+		slider_subject4.setBounds(679, 574, 200, 30);
 		contentPane.add(slider_subject4);
 		
 		slider_subject5.addChangeListener(new ChangeListener() {
@@ -377,32 +387,39 @@ public class lectures extends JFrame {
 		slider_subject5.setMaximum(8);
 		slider_subject5.setMajorTickSpacing(1);
 		slider_subject5.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		slider_subject5.setBounds(637, 441, 200, 30);
+		slider_subject5.setBounds(679, 634, 200, 30);
 		contentPane.add(slider_subject5);
 		
 		lectures_1.setHorizontalTextPosition(SwingConstants.LEFT);
 		lectures_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lectures_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lectures_1.setBounds(970, 174, 32, 30);
+		lectures_1.setBounds(955, 390, 32, 30);
 		contentPane.add(lectures_1);
 		
 		lectures_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lectures_2.setBounds(970, 231, 32, 30);
+		lectures_2.setBounds(955, 451, 32, 30);
 		contentPane.add(lectures_2);
 		
 		lectures_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lectures_3.setBounds(970, 298, 32, 30);
+		lectures_3.setBounds(955, 508, 32, 30);
 		contentPane.add(lectures_3);
 		
 		lectures_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lectures_4.setBounds(970, 352, 32, 30);
+		lectures_4.setBounds(955, 571, 32, 30);
 		contentPane.add(lectures_4);
 		
 		lectures_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lectures_5.setBounds(970, 431, 32, 30);
+		lectures_5.setBounds(955, 634, 32, 30);
 		contentPane.add(lectures_5);
 		
 		GenerateButton = new JButton("GENERATE");
+		GenerateButton.setFont(new Font("Tw Cen MT", Font.BOLD, 15));
+		GenerateButton.setBackground(Color.white);
+		GenerateButton.setForeground(Color.white);
+		GenerateButton.setOpaque(false);
+		GenerateButton.setContentAreaFilled(false);
+		GenerateButton.setBorderPainted(true);
+		GenerateButton.setBorder(new RoundedBorder(35));
 		teacher_1 = new JTextField();
 		teacher_2 = new JTextField();
 		teacher_3 = new JTextField();
@@ -422,7 +439,7 @@ public class lectures extends JFrame {
 				enterNames(teacherName3,subject_3.getText());
 				enterNames(teacherName4,subject_4.getText());
 				enterNames(teacherName5,subject_5.getText());
-				Time_Table_screen screen = new Time_Table_screen(numberOfSections,stream,name,subject1,subject2,subject3,subject4,subject5);
+				Time_Table_Screen screen = new Time_Table_Screen(numberOfSections,stream,name,subject1,subject2,subject3,subject4,subject5);
 				screen.frmTimetableGenerator.setVisible(true);
 				JComponent comp = (JComponent) e.getSource();
 				  Window win = SwingUtilities.getWindowAncestor(comp);
@@ -430,10 +447,17 @@ public class lectures extends JFrame {
 			}
 		});
 		GenerateButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GenerateButton.setBounds(443, 568, 181, 30);
+		GenerateButton.setBounds(565, 706, 181, 30);
 		contentPane.add(GenerateButton);
 		
-		backButton = new JButton("Go Back");
+		backButton = new JButton("GO BACK");
+		backButton.setFont(new Font("Tw Cen MT", Font.BOLD, 15));
+		backButton.setBackground(Color.white);
+		backButton.setForeground(Color.white);
+		backButton.setOpaque(false);
+		backButton.setContentAreaFilled(false);
+		backButton.setBorderPainted(true);
+		backButton.setBorder(new RoundedBorder(35));
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComponent comp = (JComponent) e.getSource();
@@ -444,42 +468,47 @@ public class lectures extends JFrame {
 			}
 		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		backButton.setBounds(905, 622, 112, 30);
+		backButton.setBounds(815, 706, 172, 30);
 		contentPane.add(backButton);
 		
-		JLabel lblNewLabel = new JLabel("Enter the Number of lectures and Name of the Teacher for the respective subject");
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		lblNewLabel.setBounds(290, 50, 814, 30);
 		contentPane.add(lblNewLabel);
 		
 		teacher_1.setToolTipText("Enter the name of the Teacher");
 		teacher_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		teacher_1.setBounds(1105, 174, 229, 30);
+		teacher_1.setBounds(1121, 391, 229, 30);
 		contentPane.add(teacher_1);
 		teacher_1.setColumns(10);
 		
 		teacher_2.setToolTipText("Enter the name of the Teacher");
 		teacher_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		teacher_2.setColumns(10);
-		teacher_2.setBounds(1105, 231, 229, 30);
+		teacher_2.setBounds(1121, 452, 229, 30);
 		contentPane.add(teacher_2);
 		
 		teacher_3.setToolTipText("Enter the name of the Teacher");
 		teacher_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		teacher_3.setColumns(10);
-		teacher_3.setBounds(1105, 298, 229, 30);
+		teacher_3.setBounds(1121, 509, 229, 30);
 		contentPane.add(teacher_3);
 		
 		teacher_4.setToolTipText("Enter the name of the Teacher");
 		teacher_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		teacher_4.setColumns(10);
-		teacher_4.setBounds(1105, 362, 229, 30);
+		teacher_4.setBounds(1121, 572, 229, 30);
 		contentPane.add(teacher_4);
 		
 		teacher_5.setToolTipText("Enter the name of the Teacher");
 		teacher_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		teacher_5.setColumns(10);
-		teacher_5.setBounds(1105, 433, 229, 30);
+		teacher_5.setBounds(1121, 635, 229, 30);
 		contentPane.add(teacher_5);
+		
+		lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(lectures.class.getResource("/Images/MainWindow_bg.png")));
+		lblNewLabel_1.setBounds(-59, -7, 2100, 1000);
+		contentPane.add(lblNewLabel_1);
 	}
 }
